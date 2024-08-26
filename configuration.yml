@@ -1,0 +1,45 @@
+csv_output: C:\Users\ADMIN\Documents\Extended Project\MASK_API_Copy-master\dataset
+data_output: C:\Users\ADMIN\Documents\Extended Project\MASK_API_Copy-master\dataset
+dataset_location: C:\Users\ADMIN\Documents\Extended Project\MASK_API_Copy-master\dataset\test
+  folder
+entity:
+  AGE:
+    algorithm:
+      algorithm1: NER_BERT
+    masking_class: mask_age_simple
+    masking_type: Mask
+    resolution: union
+  CONTACT:
+    algorithm:
+      algorithm1: NER_BERT
+    masking_class: mask_contact_simple
+    masking_type: Mask
+    resolution: union
+  DATE:
+    algorithm:
+      algorithm1: NER_BERT
+    masking_class: Mask_date_simple
+    masking_type: Mask
+    resolution: union
+  ID:
+    algorithm:
+      algorithm1: NER_BERT
+    masking_class: mask_id_simple
+    masking_type: Mask
+    resolution: union
+  LOCATION:
+    algorithm:
+      algorithm1: NER_BERT
+    masking_class: mask_location_simple
+    masking_type: Mask
+    resolution: union
+  NAME:
+    algorithm:
+      algorithm1: NER_BERT
+    masking_class: mask_name_simple
+    masking_type: Mask
+    resolution: union
+project_name: Masking v1
+project_owner: Nikola Milosevic
+project_owner_contact: nikola.milosevic@manchester.ac.uk
+project_start_date: 30/05/2019

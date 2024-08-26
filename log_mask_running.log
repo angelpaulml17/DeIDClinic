@@ -1,0 +1,385 @@
+Project name: Masking v1
+Time of run: 2024-08-18 22:51:11.960487
+
+RUN LOG 
+Running stats for file: 220-01.xml
+Masked token : 2067 --> New token : DATE 
+Masked token : 05 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 55 --> New token : AGE 
+Masked token : Oakley --> New token : NAME 
+Masked token : 4 --> New token : DATE 
+Masked token : 5 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : Clarkfield --> New token : LOCATION 
+Masked token : 7 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : 37 --> New token : AGE 
+Masked token : 66 --> New token : AGE 
+Masked token : 2062 --> New token : DATE 
+Masked token : 4 --> New token : DATE 
+Masked token : 63 --> New token : DATE 
+Masked token : 2065 --> New token : DATE 
+Masked token : 2 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : Oakley --> New token : NAME 
+Masked token : 2065 --> New token : DATE 
+Masked token : Oakley --> New token : NAME 
+Masked token : 3 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : 2067 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 4 --> New token : DATE 
+Masked token : 5 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : Clarkfield --> New token : LOCATION 
+Masked token : 7 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : 2062 --> New token : DATE 
+Masked token : 2065 --> New token : DATE 
+
+Elements detected as AGE in 220-01.xml  :  3
+Elements detected as DATE in 220-01.xml  :  26
+Elements detected as LOCATION in 220-01.xml  :  2
+Elements detected as NAME in 220-01.xml  :  3
+END for file:220-01.xml
+========================================================================Running stats for file: 220-02.xml
+Masked token : 2068 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 05 --> New token : DATE 
+Masked token : 37 --> New token : AGE 
+Masked token : 66 --> New token : AGE 
+Masked token : 2062 --> New token : DATE 
+Masked token : 2 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : 4 --> New token : DATE 
+Masked token : 63 --> New token : DATE 
+Masked token : 2065 --> New token : DATE 
+Masked token : 2 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : Oakley --> New token : NAME 
+Masked token : Clarkfield --> New token : LOCATION 
+Masked token : 3 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : 2065 --> New token : DATE 
+Masked token : 2066 --> New token : DATE 
+Masked token : Dolan --> New token : NAME 
+Masked token : Dolan --> New token : NAME 
+Masked token : June --> New token : DATE 
+Masked token : Beverly --> New token : NAME 
+Masked token : Thiel --> New token : NAME 
+Masked token : 2068 --> New token : DATE 
+Masked token : 2062 --> New token : DATE 
+Masked token : 2 --> New token : DATE 
+Masked token : 4 --> New token : DATE 
+Masked token : 63 --> New token : DATE 
+Masked token : 2065 --> New token : DATE 
+Masked token : 2 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+
+Elements detected as AGE in 220-02.xml  :  2
+Elements detected as DATE in 220-02.xml  :  24
+Elements detected as LOCATION in 220-02.xml  :  1
+Elements detected as NAME in 220-02.xml  :  5
+END for file:220-02.xml
+========================================================================Running stats for file: 220-03.xml
+Masked token : 2070 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 01 --> New token : DATE 
+Masked token : Foust --> New token : NAME 
+Masked token : 4 --> New token : DATE 
+Masked token : 66 --> New token : DATE 
+Masked token : 37 --> New token : AGE 
+Masked token : 41 --> New token : AGE 
+Masked token : 66 --> New token : AGE 
+Masked token : 2062 --> New token : DATE 
+Masked token : 2 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : 4 --> New token : DATE 
+Masked token : 63 --> New token : DATE 
+Masked token : 3 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : 2065 --> New token : DATE 
+Masked token : 2 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : Oakley --> New token : NAME 
+Masked token : Clarkfield --> New token : LOCATION 
+Masked token : 3 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : Oakley --> New token : NAME 
+Masked token : Oakley --> New token : NAME 
+Masked token : 2065 --> New token : DATE 
+Masked token : Dolan --> New token : NAME 
+Masked token : April --> New token : DATE 
+Masked token : 78 --> New token : AGE 
+Masked token : 58 --> New token : AGE 
+Masked token : 62 --> New token : AGE 
+Masked token : 37 --> New token : AGE 
+Masked token : Convergys --> New token : LOCATION 
+Masked token : 26 --> New token : AGE 
+Masked token : 11 --> New token : DATE 
+Masked token : 29 --> New token : DATE 
+Masked token : 2067 --> New token : DATE 
+Masked token : 11 --> New token : DATE 
+Masked token : 29 --> New token : DATE 
+Masked token : 2067 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 01 --> New token : DATE 
+Masked token : 64 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 2066 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 2066 --> New token : DATE 
+Masked token : 06 --> New token : DATE 
+Masked token : 15 --> New token : DATE 
+Masked token : 2068 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 28 --> New token : DATE 
+Masked token : 59 --> New token : DATE 
+Masked token : 11 --> New token : DATE 
+Masked token : 29 --> New token : DATE 
+Masked token : 2067 --> New token : DATE 
+Masked token : 11 --> New token : DATE 
+Masked token : 29 --> New token : DATE 
+Masked token : 2067 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 16 --> New token : DATE 
+Masked token : 2067 --> New token : DATE 
+Masked token : 11 --> New token : DATE 
+Masked token : 29 --> New token : DATE 
+Masked token : 2067 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 16 --> New token : DATE 
+Masked token : 2067 --> New token : DATE 
+Masked token : Beverly --> New token : NAME 
+Masked token : Thiel --> New token : NAME 
+Masked token : 2070 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : Foust --> New token : NAME 
+Masked token : 4 --> New token : DATE 
+Masked token : 66 --> New token : DATE 
+Masked token : 2062 --> New token : DATE 
+Masked token : 2 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : 2065 --> New token : DATE 
+
+Elements detected as AGE in 220-03.xml  :  8
+Elements detected as DATE in 220-03.xml  :  63
+Elements detected as LOCATION in 220-03.xml  :  2
+Elements detected as NAME in 220-03.xml  :  8
+END for file:220-03.xml
+========================================================================Running stats for file: 220-04.xml
+Masked token : 2072 --> New token : DATE 
+Masked token : 07 --> New token : DATE 
+Masked token : 27 --> New token : DATE 
+Masked token : 2070 --> New token : DATE 
+Masked token : 37 --> New token : AGE 
+Masked token : 41 --> New token : AGE 
+Masked token : 66 --> New token : AGE 
+Masked token : 2062 --> New token : DATE 
+Masked token : Foust --> New token : NAME 
+Masked token : 2066 --> New token : DATE 
+Masked token : 2 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : 4 --> New token : DATE 
+Masked token : 63 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 70 --> New token : DATE 
+Masked token : 2065 --> New token : DATE 
+Masked token : 2 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : Oakley --> New token : NAME 
+Masked token : Clarkfield --> New token : LOCATION 
+Masked token : 3 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : Oakley --> New token : NAME 
+Masked token : 2065 --> New token : DATE 
+Masked token : February --> New token : DATE 
+Masked token : 2071 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 71 --> New token : DATE 
+Masked token : Dolan --> New token : NAME 
+Masked token : January --> New token : DATE 
+Masked token : 2071 --> New token : DATE 
+Masked token : March --> New token : DATE 
+Masked token : 0760305 --> New token : ID 
+Masked token : 85 --> New token : AGE 
+Masked token : 58 --> New token : AGE 
+Masked token : 62 --> New token : AGE 
+Masked token : 37 --> New token : AGE 
+Masked token : Convergys --> New token : LOCATION 
+Masked token : 2070 --> New token : DATE 
+Masked token : 29 --> New token : AGE 
+Masked token : 76 --> New token : DATE 
+Masked token : 11 --> New token : DATE 
+Masked token : 29 --> New token : DATE 
+Masked token : 2067 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 16 --> New token : DATE 
+Masked token : 2070 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 01 --> New token : DATE 
+Masked token : 64 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 16 --> New token : DATE 
+Masked token : 2070 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 2066 --> New token : DATE 
+Masked token : 06 --> New token : DATE 
+Masked token : 04 --> New token : DATE 
+Masked token : 2071 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 2066 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 2070 --> New token : DATE 
+Masked token : 2070 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 2070 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 2072 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 09 --> New token : DATE 
+Masked token : 2071 --> New token : DATE 
+Masked token : Beverly --> New token : NAME 
+Masked token : Thiel --> New token : NAME 
+Masked token : 2072 --> New token : DATE 
+Masked token : 2070 --> New token : DATE 
+Masked token : 2062 --> New token : DATE 
+Masked token : 2066 --> New token : DATE 
+
+Elements detected as AGE in 220-04.xml  :  8
+Elements detected as DATE in 220-04.xml  :  62
+Elements detected as ID in 220-04.xml  :  1
+Elements detected as LOCATION in 220-04.xml  :  2
+Elements detected as NAME in 220-04.xml  :  6
+END for file:220-04.xml
+========================================================================Running stats for file: 220-05.xml
+Masked token : 2075 --> New token : DATE 
+Masked token : 01 --> New token : DATE 
+Masked token : 31 --> New token : DATE 
+Masked token : 37 --> New token : AGE 
+Masked token : 41 --> New token : AGE 
+Masked token : 51 --> New token : AGE 
+Masked token : 66 --> New token : AGE 
+Masked token : Koch --> New token : NAME 
+Masked token : 2062 --> New token : DATE 
+Masked token : Foust --> New token : NAME 
+Masked token : 2066 --> New token : DATE 
+Masked token : 2070 --> New token : DATE 
+Masked token : 2 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : 4 --> New token : DATE 
+Masked token : 63 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 70 --> New token : DATE 
+Masked token : 2065 --> New token : DATE 
+Masked token : 2 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : Oakley --> New token : NAME 
+Masked token : Clarkfield --> New token : LOCATION 
+Masked token : 3 --> New token : DATE 
+Masked token : 67 --> New token : DATE 
+Masked token : Koch --> New token : NAME 
+Masked token : 1 --> New token : DATE 
+Masked token : 75 --> New token : DATE 
+Masked token : 2065 --> New token : DATE 
+Masked token : February --> New token : DATE 
+Masked token : 2071 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 71 --> New token : DATE 
+Masked token : Dolan --> New token : NAME 
+Masked token : Moton --> New token : LOCATION 
+Masked token : Hospital --> New token : LOCATION 
+Masked token : 86 --> New token : AGE 
+Masked token : 58 --> New token : AGE 
+Masked token : 62 --> New token : AGE 
+Masked token : 37 --> New token : AGE 
+Masked token : 51 --> New token : AGE 
+Masked token : Convergys --> New token : LOCATION 
+Masked token : 2070 --> New token : DATE 
+Masked token : 30 --> New token : AGE 
+Masked token : 03 --> New token : DATE 
+Masked token : 09 --> New token : DATE 
+Masked token : 62 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 05 --> New token : DATE 
+Masked token : 2074 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 05 --> New token : DATE 
+Masked token : 2074 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 05 --> New token : DATE 
+Masked token : 2074 --> New token : DATE 
+Masked token : 06 --> New token : DATE 
+Masked token : 04 --> New token : DATE 
+Masked token : 2071 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 05 --> New token : DATE 
+Masked token : 2074 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 05 --> New token : DATE 
+Masked token : 2074 --> New token : DATE 
+Masked token : 04 --> New token : DATE 
+Masked token : 27 --> New token : DATE 
+Masked token : 2072 --> New token : DATE 
+Masked token : 04 --> New token : DATE 
+Masked token : 27 --> New token : DATE 
+Masked token : 2072 --> New token : DATE 
+Masked token : 11 --> New token : DATE 
+Masked token : 29 --> New token : DATE 
+Masked token : 2067 --> New token : DATE 
+Masked token : 02 --> New token : DATE 
+Masked token : 10 --> New token : DATE 
+Masked token : 2074 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 16 --> New token : DATE 
+Masked token : 2070 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 16 --> New token : DATE 
+Masked token : 2070 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 05 --> New token : DATE 
+Masked token : 2074 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 05 --> New token : DATE 
+Masked token : 2074 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 2066 --> New token : DATE 
+Masked token : 03 --> New token : DATE 
+Masked token : 12 --> New token : DATE 
+Masked token : 2066 --> New token : DATE 
+Masked token : 2070 --> New token : DATE 
+Masked token : 2071 --> New token : DATE 
+Masked token : 2081 --> New token : DATE 
+Masked token : 2074 --> New token : DATE 
+Masked token : Moton --> New token : LOCATION 
+Masked token : Hospital --> New token : LOCATION 
+Masked token : Dolan --> New token : NAME 
+Masked token : Beverly --> New token : NAME 
+Masked token : Thiel --> New token : NAME 
+Masked token : 2075 --> New token : DATE 
+Masked token : 2062 --> New token : DATE 
+Masked token : Foust --> New token : NAME 
+Masked token : 2066 --> New token : DATE 
+Masked token : 2070 --> New token : DATE 
+
+Elements detected as AGE in 220-05.xml  :  10
+Elements detected as DATE in 220-05.xml  :  84
+Elements detected as LOCATION in 220-05.xml  :  6
+Elements detected as NAME in 220-05.xml  :  9
+END for file:220-05.xml
+========================================================================
+
+ ========================== FINAL STATS ======================== 
+
+
+Total elements masked/redacted as AGE  :  31
+Total elements masked/redacted as DATE  :  259
+Total elements masked/redacted as ID  :  1
+Total elements masked/redacted as LOCATION  :  13
+Total elements masked/redacted as NAME  :  31
