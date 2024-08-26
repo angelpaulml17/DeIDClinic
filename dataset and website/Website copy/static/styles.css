@@ -1,0 +1,554 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    color: #333;
+}
+/* styles.css */
+
+.upload-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.controls {
+    display: flex;
+    gap: 10px;
+}
+
+.controls select, 
+.controls button {
+    margin-left: 10px;
+}
+
+.navbar .dropdown-content {
+    display: none;
+    width: 900px; /* Adjust this value to make the dropdown wider */
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 100%; /* Position the dropdown below the toggle */
+    right: 0; /* Align to the right edge of the container */
+    transform: translateX(-1%); /* Shift the dropdown to the left */
+    z-index: 1;
+}
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .high-risk-files-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.high-risk-file {
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.navbar .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+
+.dropdown-content input[type="checkbox"],
+.dropdown-content select {
+    margin-right: 10px;
+}
+
+
+.dropdown-content label {
+    color: black; /* Ensure labels are visible */
+}
+
+.dropdown-content button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content button:hover {
+    background-color: #0056b3;
+}
+.columns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px;
+    box-sizing: border-box;
+    height: 400px; /* Fixed height */
+    overflow-y: auto; /* Add scrollbar if content overflows */
+}
+
+.column h3 {
+    margin-top: 0;
+}
+header {
+    background-color: #007BFF;
+    padding: 10px 20px;
+    color: white;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-left: 20px;
+    position: relative;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-family: Arial;
+    font-size:16px;
+}
+
+.dropdown .dropbtn {
+    cursor: pointer;
+    display: inline-block;
+    color: black;
+    text-decoration: none;
+}
+.columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.file-result {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.file-result .column {
+    flex: 1 1 50%; /* Adjust this value as needed */
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.file-result h3 {
+    margin-top: 0;
+}
+
+.file-result .original, .file-result .redacted {
+    white-space: pre-wrap;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#navigationButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#navigationButtons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+span.name, span.redacted.name span.age, span.redacted.age{
+    background-color: rgb(255, 0, 123); /* Example: blue background for names */
+    color: black; /* White text color */
+}
+
+
+.dropdown-content form {
+    padding: 10px;
+}
+
+.dropdown-content label,
+.dropdown-content select,
+.dropdown-content input,
+.dropdown-content button {
+    display: block;
+    
+    margin-bottom: 10px;
+}
+
+.dropdown-content input[type="checkbox"] {
+    display: inline-block;
+    width: auto;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+section {
+    padding: 20px;
+    margin: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+section h1, section h2 {
+    margin-top: 0;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.tool {
+    margin-bottom: 20px;
+}
+
+form div {
+    margin-bottom: 10px;
+}
+@media (max-width: 768px) {
+    .dropdown-content{
+        grid-template-columns: 1fr 1fr; /* Two columns on smaller screens */
+        gap: 15px;
+    }
+    .settings-container {
+        padding: 10px; /* Less padding on smaller screens */
+    }
+}
+
+
+
+form input, form select, form textarea {
+   
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+.entity-settings {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px; /* Add space between elements */
+}
+
+.entity-settings label {
+    margin-right: 10px;
+    min-width: 70px; /* Ensure labels have a minimum width */
+}
+
+.entity-settings select, .entity-settings input[type="file"], .entity-settings input[type="checkbox"] {
+    margin-right: 10px;
+    flex-shrink: 0; /* Prevents shrinking */
+}
+
+.entity-settings input[type="file"] {
+    flex-grow: 1; /* Allow file input to grow */
+}
+
+
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Four columns */
+    gap: 20px; /* Spacing between grid items */
+}
+
+.setting-row {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Spacing between form elements */
+}
+
+.setting-row label {
+    flex-basis: 20%;
+    font-size: 14px;
+}
+
+.setting-row input[type="checkbox"],
+.setting-row input[type="file"],
+.setting-row select {
+    flex-grow: 1;
+    padding: 8px;
+    font-size: 0.95rem;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+#deidentifiedText {
+    
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+#previousFiles li {
+    list-style-type: none;
+    background-color: #e9ecef;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.team-member {
+    margin-bottom: 10px;
+}
+
+#map {
+    height: 200px;
+    background-color: #ccc;
+}
+
+#reviewContent {
+    background-color: #e9ecef;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+/* General styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    padding: 20px;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+#upload-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.upload-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    padding: 10px;
+    border: 2px dashed #007bff;
+    border-radius: 8px;
+    background: #f9f9f9;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="file"]:hover {
+    border-color: #0056b3;
+}
+
+.entity-controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-right: 10px;
+    transition: border-color 0.3s;
+}
+
+select:focus {
+    border-color: #007bff;
+}
+
+
+
+
+#letters-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.letter-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 48%;
+}
+
+textarea {
+    width: 100%;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    font-size: 16px;
+    padding: 12px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
+}
+
+textarea:focus {
+    border-color: #007bff;
+}
+
+#download-section {
+    text-align: center;
+}
+
+.download-btn {
+    width: 60%;
+    padding: 15px;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+}
+
+.download-btn:hover {
+    background: linear-gradient(90deg, #0072ff, #00c6ff);
+}
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+.btn.primary {
+    background-color: #00bfff;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Adjust the spacing between radio buttons as needed */
+}
+
+.radio-group label {
+    margin: 0;
+    padding: 5px;
+    font-size: 16px; /* Adjust the font size as needed */
+}
