@@ -78,3 +78,5 @@ wrapt==1.16.0
 zipp==3.15.0
 seqeval
 matplotlib
+lxml
+beautifulsoup4
