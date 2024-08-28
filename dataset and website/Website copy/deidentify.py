@@ -792,88 +792,11 @@ def deidentify_text1(xml_file_path, action):
 import pandas as pd
 from collections import Counter
 
-# # Calculate the uniqueness of the replaced entities
-# def calculate_uniqueness(entities):
-#     counts = Counter(entities)
-#     unique_count = sum(1 for count in counts.values() if count == 1)
-#     return unique_count / len(entities) if entities else 0
-
-# # Calculate k-anonymity
-# def calculate_k_anonymity(entities):
-#     counts = Counter(entities)
-#     return min(counts.values()) if entities else 0
-
-# # Calculate l-diversity for a specific attribute
-# def calculate_l_diversity(entities):
-#     counts = Counter(entities)
-#     return len(counts) / len(entities) if entities else 0
-
-# # Perform risk assessment on the replaced text
-# def perform_risk_assessment(replaced_text, original_entities, replaced_entities):
-#     # Flatten the list of entities for uniqueness calculation
-#     original_flat = [ent[0] for ent in original_entities]
-#     replaced_flat = [ent[0] for ent in replaced_entities]
-
-#     # Calculate uniqueness, k-anonymity, and l-diversity
-#     original_uniqueness = calculate_uniqueness(original_flat)
-#     replaced_uniqueness = calculate_uniqueness(replaced_flat)
-#     original_k_anonymity = calculate_k_anonymity(original_flat)
-#     replaced_k_anonymity = calculate_k_anonymity(replaced_flat)
-#     original_l_diversity = calculate_l_diversity(original_flat)
-#     replaced_l_diversity = calculate_l_diversity(replaced_flat)
-
-#     # Print risk assessment results
-#     print("Risk Assessment Results:")
-#     print(f"Original Text Uniqueness: {original_uniqueness}")
-#     print(f"Replaced Text Uniqueness: {replaced_uniqueness}")
-#     print(f"Original Text k-Anonymity: {original_k_anonymity}")
-#     print(f"Replaced Text k-Anonymity: {replaced_k_anonymity}")
-#     print(f"Original Text l-Diversity: {original_l_diversity}")
-#     print(f"Replaced Text l-Diversity: {replaced_l_diversity}")
-
-#     # Determine if replaced text has higher risk
-#     risk_increased = replaced_uniqueness < original_uniqueness or replaced_k_anonymity > original_k_anonymity
-#     print(f"Re-identification Risk Increased: {risk_increased}")
-
-#     return {
-#         "original_uniqueness": original_uniqueness,
-#         "replaced_uniqueness": replaced_uniqueness,
-#         "original_k_anonymity": original_k_anonymity,
-#         "replaced_k_anonymity": replaced_k_anonymity,
-#         "original_l_diversity": original_l_diversity,
-#         "replaced_l_diversity": replaced_l_diversity,
-#         "risk_increased": risk_increased
-#     }
 
 
 from transformers import BertTokenizerFast
 
-# def extract_entities_with_context(text, original_entities, window_size=5):
-#     tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
-#     tokens = tokenizer.tokenize(text)
-#     token_offsets = tokenizer.encode_plus(text, return_offsets_mapping=True)["offset_mapping"]
 
-#     def char_to_token_index(char_index):
-#         for token_index, (start, end) in enumerate(token_offsets):
-#             if start <= char_index < end:
-#                 return token_index
-#         return -1
-
-#     entities_with_context = []
-#     for entity, start, end, entity_type in original_entities:
-#         start_token_index = char_to_token_index(start)
-#         end_token_index = char_to_token_index(end)
-
-#         if start_token_index == -1 or end_token_index == -1:
-#             continue
-
-#         context_start = max(0, start_token_index - window_size)
-#         context_end = min(len(tokens), end_token_index + window_size)
-
-#         context = ' '.join(tokens[context_start:context_end])
-#         entities_with_context.append((entity, context, entity_type))
-
-#     return entities_with_context
 from transformers import BertTokenizer, BertModel
 import torch
 from sklearn.metrics.pairwise import cosine_similarity
@@ -910,29 +833,7 @@ def extract_entities_with_context(text, original_entities, window_size=5):
 
     return entities_with_context
 
-# def extract_entities_with_context(text, original_entities, ner_model, window_size=5):
-    
-#     tokens = text.split()
-#     entities_with_context = []
-#     for entity, start, end, entity_type in original_entities:
-#         print(start)
-#         print(end)
-#         print(entity)
-        
-#         start_word_index = len(text[:start].split())
-#         end_word_index = len(text[:end].split())
-        
-#         print(start_word_index)
-#         print(end_word_index)
-        
-#         context_start = max(0, start_word_index - window_size)
-#         context_end = min(len(tokens), end_word_index + window_size)
-#         print(context_start)
-#         print(context_end)
-#         context = ' '.join(tokens[context_start:context_end])
-#         print(context)
-#         entities_with_context.append((entity, context, entity_type))
-#     return entities_with_context
+
 
 def calculate_k_anonymity(entities):
     counts = Counter([context for entity, context, entity_type in entities])
