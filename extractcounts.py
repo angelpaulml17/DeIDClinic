@@ -1,7 +1,7 @@
 import os
 from collections import defaultdict
 from bs4 import BeautifulSoup
-
+import matplotlib.pyplot as plt
 # Define the directory containing the XML files
 xml_directory = 'dataset/training-PHI-Gold-Set1'
 
@@ -70,3 +70,34 @@ with open('unique_entities.txt', 'w', encoding='utf-8') as f:
         for entity in entities:
             f.write(f"  - {entity}\n")
         f.write("\n")
+entities = list(total_entity_counts.keys())
+value_counts = [total_entity_counts[entity] for entity in entities]
+unique_counts = [len(total_unique_entities[entity]) for entity in entities]
+
+# Plotting the bar graph
+x = range(len(entities))
+width = 0.4
+
+fig, ax = plt.subplots()
+bar1 = ax.bar(x, value_counts, width, label='Value Count')
+bar2 = ax.bar([p + width for p in x], unique_counts, width, label='Unique Count')
+
+# Adding labels and title
+ax.set_xlabel('Entity')
+ax.set_ylabel('Count')
+ax.set_title('Value Counts vs Unique Counts for Each Entity')
+ax.set_xticks([p + width / 2 for p in x])
+ax.set_xticklabels(entities, rotation=45, ha='right')
+ax.legend()
+
+# Adding value labels on top of the bars
+for bar in bar1:
+    yval = bar.get_height()
+    ax.text(bar.get_x() + bar.get_width()/2.0, yval, int(yval), va='bottom')  # va: vertical alignment
+
+for bar in bar2:
+    yval = bar.get_height()
+    ax.text(bar.get_x() + bar.get_width()/2.0, yval, int(yval), va='bottom')  # va: vertical alignment
+
+plt.tight_layout()
+plt.show()
