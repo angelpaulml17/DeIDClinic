@@ -4,21 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clinical Text Deidentification</title>
-    <!-- Link to the external CSS file for styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <!-- Header section with navigation bar -->
     <header>
         <nav>
             <div class="navbar">
                 <div class="logo">DeIDClinic</div>
                 <ul class="nav-links">
-                    <!-- Dropdown menu for settings -->
+                    
                     <li class="dropdown">
                         <a href="#settings" class="dropbtn">Settings
                             <div class="settings-container">
-                                <!-- Form for processing deidentification settings -->
                                 <form id="settingsForm" action="/process_deidentification" method="post">
                                     <div class="dropdown-content">
                                         <!-- Entity Settings for Name -->
@@ -36,6 +33,7 @@
                                             </select>
                                             <div>Custom Dictionary </div><input type="file" id="nameDataset" name="nameDataset">
                                         </div>
+                
                                         <!-- Entity Settings for Age -->
                                         <div class="entity-settings">
                                             <input type="checkbox" id="ageCheckbox" name="entities" value="Age">
@@ -51,6 +49,7 @@
                                             </select>
                                             Custom Dictionary <input type="file" id="ageDataset" name="ageDataset">
                                         </div>
+                
                                         <!-- Entity Settings for Date -->
                                         <div class="entity-settings">
                                             <input type="checkbox" id="dateCheckbox" name="entities" value="Date">
@@ -66,6 +65,7 @@
                                             </select>
                                             Custom Dictionary <input type="file" id="dateDataset" name="dateDataset">
                                         </div>
+                
                                         <!-- Entity Settings for Profession -->
                                         <div class="entity-settings">
                                             <input type="checkbox" id="professionCheckbox" name="entities" value="Profession">
@@ -81,7 +81,6 @@
                                             </select>
                                             Custom Dictionary <input type="file" id="professionDataset" name="professionDataset">
                                         </div>
-                                        <!-- Entity Settings for Location -->
                                         <div class="entity-settings">
                                             <input type="checkbox" id="locationCheckbox" name="entities" value="Location">
                                             <label for="locationCheckbox">Location</label>
@@ -96,21 +95,21 @@
                                             </select>
                                             Custom Dictionary <input type="file" id="locationDataset" name="locationDataset">
                                         </div>
-                                        <!-- Radio buttons for selecting action (Redact or Replace) -->
                                         <div class="radio-group">
                                             <input type="radio" id="redact" name="action" value="redact" checked>
-                                            <label for="redact">Redact</label>
-                                            <input type="radio" id="replace" name="action" value="replace">
-                                            <label for="replace">Replace</label>
-                                        </div>
-                                        <!-- Button to save settings -->
+    <label for="redact">Redact</label>
+    <input type="radio" id="replace" name="action" value="replace">
+    <label for="replace">Replace</label> </div>
+                                        
                                         <button type="submit">Save Settings</button>
                                     </div>
                                 </form>
                             </div>
                         </a>    
+                                
+                            
+                        
                     </li>
-                    <!-- Other navigation links -->
                     <li><a href="#upload">Upload</a></li>
                     <li><a href="#results">Results</a></li>
                     <li><a href="#batch">Batch Process</a></li>
@@ -119,83 +118,17 @@
         </nav>
     </header>
 
-    <!-- Section for uploading a clinical letter -->
+   
+
     <section id="upload">
+        
         <div class="content">
             <h2>Upload a Clinical Letter</h2>
             <div class="upload-controls">
-                <!-- Form for uploading a single clinical letter -->
-                <form id="uploadForm">
-                    <input type="file" id="fileInput">
-                    <button class="btn btn-primary" type="submit">Upload</button>
-                </form>
-                <!-- Controls for selecting entity types and marking/removing entities -->
-                <div class="controls">
-                    <select id="entityType">
-                        <option value="name">Name</option>
-                        <option value="age">Age</option>
-                        <option value="date">Date</option>
-                        <option value="profession">Profession</option>
-                        <option value="location">Location</option>
-                        <!-- Add other entities as needed -->
-                    </select>
-                    <button onclick="markSelectedText()">Mark Entity</button>
-                    <!-- Modal for marking all occurrences of an entity -->
-                    <div class="modal fade" id="markEntityModal" tabindex="-1" role="dialog" aria-labelledby="markEntityModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="markEntityModalLabel">Mark Entity</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Do you want to mark all occurrences?</p>
-                                    <button id="markAllButton" class="btn btn-primary">Mark All</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="removeSelectedEntity()">Remove Entity</button>
-                </div>
-                <!-- Modal for replacing occurrences of an entity -->
-                <div id="replaceModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <p>Do you want to replace all occurrences or just the selected one?</p>
-                        <button id="replaceOne">Replace One</button>
-                        <button id="replaceAll">Replace All</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Columns to display the original and redacted clinical letters -->
-            <div class="columns">
-                <div class="column" id="deidentifiedColumn">
-                    <h3>Original Clinical Letter</h3>
-                    <div contenteditable="true" id="deidentifiedText"></div>
-                </div>
-                <div class="column" id="originalColumn">
-                    <h3>Redacted Clinical Letter</h3>
-                    <div id="originalText"></div>
-                </div>
-            </div>
-            <!-- Button to download the deidentified text -->
-            <button id="downloadButton">Download Deidentified Text</button>
-        </div>
-    </section>
-
-    <!-- Section for batch processing of multiple files -->
-    <section id="batch">
-        <h2>Batch Process</h2>
-        <p>Upload a folder to process multiple files at once.</p>
-        <div class="upload-controls">
-            <!-- Form for uploading a folder of files for batch processing -->
-            <form id="batchUploadForm" enctype="multipart/form-data">
-                <input type="file" id="batchInput" name="batchInput" webkitdirectory directory multiple>
-                <button class="btn btn-primary" type="submit">Process Folder</button>
+            <form id="uploadForm">
+                <input type="file" id="fileInput">
+                <button class="btn btn-primary" type="submit">Upload</button>
             </form>
-            <!-- Controls for selecting entity types and marking/removing entities in batch processing -->
             <div class="controls">
                 <select id="entityType">
                     <option value="name">Name</option>
@@ -208,56 +141,123 @@
                 <button onclick="markSelectedText()">Mark Entity</button>
                 <div class="modal fade" id="markEntityModal" tabindex="-1" role="dialog" aria-labelledby="markEntityModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="markEntityModalLabel">Mark Entity</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Do you want to mark all occurrences?</p>
-                                <button id="markAllButton" class="btn btn-primary">Mark All</button>
-                            </div>
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="markEntityModalLabel">Mark Entity</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
                         </div>
+                        <div class="modal-body">
+                          <p>Do you want to mark all occurrences?</p>
+                          
+                          <button id="markAllButton" class="btn btn-primary">Mark All</button>
+                        </div>
+                      </div>
                     </div>
-                </div>
+                  </div>
                 <button onclick="removeSelectedEntity()">Remove Entity</button>
             </div>
-            <!-- Modal for replacing occurrences of an entity in batch processing -->
             <div id="replaceModal" class="modal">
                 <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <p>Do you want to replace all occurrences or just the selected one?</p>
-                    <button id="replaceOne">Replace One</button>
-                    <button id="replaceAll">Replace All</button>
+                  <span class="close">&times;</span>
+                  <p>Do you want to replace all occurrences or just the selected one?</p>
+                  <button id="replaceOne">Replace One</button>
+                  <button id="replaceAll">Replace All</button>
                 </div>
+              </div>
             </div>
+            <div class="columns">
+                               
+                <div class="column" id="deidentifiedColumn">
+                    <h3>Original Clinical Letter</h3>
+                    <div contenteditable="true" id="deidentifiedText" ></div>
+                </div>
+                <div class="column" id="originalColumn">
+                    <h3>Redacted Clinical Letter</h3>
+                    <div id="originalText" ></div>
+                </div>
+                
+            </div>
+            <button id="downloadButton">Download Deidentified Text</button>
         </div>
-        <!-- Columns to display the original and redacted clinical letters in batch processing -->
+    </section>
+
+    
+
+   
+
+    <section id="batch">
+        <h2>Batch Process</h2>
+        <p>Upload a folder to process multiple files at once.</p>
+        <div class="upload-controls">
+        <form id="batchUploadForm" enctype="multipart/form-data">
+            <input type="file" id="batchInput" name="batchInput" webkitdirectory directory multiple>
+            <button class="btn btn-primary" type="submit">Process Folder</button>
+        </form>
+        <div class="controls">
+            <select id="entityType">
+                <option value="name">Name</option>
+                <option value="age">Age</option>
+                <option value="date">Date</option>
+                <option value="profession">Profession</option>
+                <option value="location">Location</option>
+                <!-- Add other entities as needed -->
+            </select>
+            <button onclick="markSelectedText()">Mark Entity</button>
+            <div class="modal fade" id="markEntityModal" tabindex="-1" role="dialog" aria-labelledby="markEntityModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="markEntityModalLabel">Mark Entity</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Do you want to mark all occurrences?</p>
+                      
+                      <button id="markAllButton" class="btn btn-primary">Mark All</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <button onclick="removeSelectedEntity()">Remove Entity</button>
+        </div>
+        <div id="replaceModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p>Do you want to replace all occurrences or just the selected one?</p>
+              <button id="replaceOne">Replace One</button>
+              <button id="replaceAll">Replace All</button>
+            </div>
+          </div>
+        </div>
+        <!-- Modal Dialog for Replace Options -->
+    </div>
         <div class="columns">
             <div class="column" id="deidentifiedColumn">
+                
                 <div contenteditable="true" id="deidentifiedText1"></div>
             </div>
             <div class="column" id="originalColumn">
+                
                 <div id="originalText1"></div>
             </div>
+            
         </div>
-        <!-- Navigation buttons to move through files in batch processing -->
         <div id="navigationButtons" style="display: none;">
             <button id="prevButton">Previous</button>
             <button id="nextButton">Next</button>
         </div>
-        <!-- Section for displaying risk assessment results -->
         <div id="riskAssessment">
             <h2>Risk Assessment</h2>
             <p id="riskResults"></p>
         </div>
-        <!-- Container for displaying high-risk files -->
         <div id="highRiskFilesContainer" class="high-risk-files-container"></div>
+
     </section>
 
-    <!-- Linking the external JavaScript file and jQuery library -->
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
