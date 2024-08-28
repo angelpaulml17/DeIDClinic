@@ -8,101 +8,14 @@ from transformers import BertTokenizer, BertForTokenClassification, AdamW, get_l
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, TensorDataset
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from sklearn.metrics import classification_report
-from seqeval.metrics import accuracy_score, f1_score
+from seqeval.metrics import accuracy_score, f1_score, precision_score, recall_score
+import matplotlib.pyplot as plt
+from seqeval.metrics import classification_report as seqeval_classification_report
 
 nltk.download('punkt')
-from transformers import BertForTokenClassification
-import torch
-from transformers import BertTokenizer
-import numpy as np
-import nltk.data
-
-
-import torch
-from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
-from transformers import BertTokenizer, BertConfig, AutoModelForTokenClassification, AutoConfig
-
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from sklearn.model_selection import train_test_split
-
-from transformers import BertForTokenClassification, AdamW
-
-from transformers import get_linear_schedule_with_warmup
-
-from seqeval.metrics import accuracy_score
-from sklearn.metrics import f1_score, classification_report
-
-import torch.nn as nn
-
-from tqdm import trange
-import numpy as np
-import matplotlib.pyplot as plt
-
-from nltk.tokenize import sent_tokenize
-
-import os
-
-# class NER_ClinicalBERT:
-#     def __init__(self):
-#         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-#         self.tag2idx = {'O': 0, 'ID': 1, 'PHI': 2, 'NAME': 3, 'CONTACT': 4, 'DATE': 5, 'AGE': 6, 'PROFESSION': 7, 'LOCATION': 8,
-#                         'PAD': 9}
-#         self.tag_values = list(self.tag2idx.keys())
-
-#         self.MAX_LEN = 75
-#         self.bs = 4
-
-#         self.tokenizer = BertTokenizer.from_pretrained('emilyalsentzer/Bio_ClinicalBERT', do_lower_case=False)
-#         model_path = "Models/Clinical_NER_ClinicalBERT.pt"
-        
-#         if os.path.exists(model_path):
-#             print("Loading Clinical BERT model from", model_path)
-#             self.model = BertForTokenClassification.from_pretrained(
-#                 model_path,
-#                 num_labels=len(self.tag2idx),
-#                 output_attentions=False,
-#                 output_hidden_states=False
-#             )
-#         else:
-#             self.model = BertForTokenClassification.from_pretrained(
-#                 'emilyalsentzer/Bio_ClinicalBERT',
-#                 num_labels=len(self.tag2idx),
-#                 output_attentions=False,
-#                 output_hidden_states=False
-#             )
-            
-#         self.model.to(self.device)
-
-#     def perform_NER(self, text):
-#         self.model.eval()
-#         tokenized_sentence = self.tokenizer.encode(text, truncation=True, padding="max_length", max_length=self.MAX_LEN)
-#         input_ids = torch.tensor([tokenized_sentence]).to(self.device)
-        
-#         with torch.no_grad():
-#             output = self.model(input_ids)
-#         label_indices = np.argmax(output[0].to('cpu').numpy(), axis=2)
-
-#         tokens = self.tokenizer.convert_ids_to_tokens(input_ids.to('cpu').numpy()[0])
-#         new_tokens, new_labels = [], []
-#         for token, label_idx in zip(tokens, label_indices[0]):
-#             if token.startswith("##"):
-#                 new_tokens[-1] = new_tokens[-1] + token[2:]
-#             else:
-#                 new_labels.append(self.tag_values[label_idx])
-#                 new_tokens.append(token)
-        
-#         return list(zip(new_tokens, new_labels))
-
-from transformers import BertTokenizer, BertForTokenClassification, AutoModelForTokenClassification, AdamW
-import torch
-from torch.utils.data import TensorDataset, DataLoader, RandomSampler
-from nltk.tokenize import sent_tokenize
-import os
-import numpy as np
 
 class NER_ClinicalBERT(object):
-    device = torch.device("cpu")  # Use "cuda" if GPU is available
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  # Use "cuda" if GPU is available
 
     # Define the tag indices as they were defined in the original model
     tag2idx = {'O': 0, 'ID': 1, 'PHI': 2, 'NAME': 3, 'CONTACT': 4, 'DATE': 5, 'AGE': 6, 'PROFESSION': 7, 'LOCATION': 8, 'PAD': 9}
@@ -110,19 +23,22 @@ class NER_ClinicalBERT(object):
 
     # Initialize tokenizer and model with Clinical BERT
     tokenizer = BertTokenizer.from_pretrained('emilyalsentzer/Bio_ClinicalBERT', do_lower_case=False)
-    model = AutoModelForTokenClassification.from_pretrained('emilyalsentzer/Bio_ClinicalBERT', num_labels=len(tag2idx))
+    model = BertForTokenClassification.from_pretrained('emilyalsentzer/Bio_ClinicalBERT', num_labels=len(tag2idx))
 
     MAX_LEN = 75  # Maximum length of the sequences
-    bs = 4  # Batch size for training and evaluation
+    bs = 32  # Batch size for training and evaluation
 
     def __init__(self):
+        self.loss_values = []  # Initialize loss_values
+        self.train_accuracies = []  # Initialize train_accuracies
         if os.path.exists("Models/NER_ClinicalBERT.pt"):
             print("Loading model")
             state_dict = torch.load("Models/NER_ClinicalBERT.pt", map_location=self.device)
             print("Loaded model")
-            self.model.load_state_dict(state_dict)
+            self.model.load_state_dict(state_dict, strict=False)
         else:
             print("Using pre-trained Clinical BERT model")
+        self.model.to(self.device)
 
     def perform_NER(self, text):
         # Tokenize text and perform NER with the Clinical BERT model
@@ -149,15 +65,12 @@ class NER_ClinicalBERT(object):
 
         return list_of_tuples_by_sent
 
-    # Additional methods like `tokenize_and_preserve_labels`, `transform_sequences`, `learn`, and `evaluate`
-    # would be similarly adapted from the original code.
-
     def tokenize_and_preserve_labels(self, sentence, text_labels):
         tokenized_sentence = []
         labels = []
 
         for word, label in zip(sentence, text_labels):
-            # Use `self.tokenizer` to access the instance's tokenizer
+            # Use self.tokenizer to access the instance's tokenizer
             tokenized_word = self.tokenizer.tokenize(word)
             n_subwords = len(tokenized_word)
 
@@ -168,9 +81,7 @@ class NER_ClinicalBERT(object):
         return tokenized_sentence, labels
 
     def transform_sequences(self, tokens_labels):
-        """method that transforms sequences of (token,label) into feature sequences. Returns two sequence lists for X and Y"""
-        print("I am in transform seq")
-        # result - one document, result[i] is sentence in document, result [i][i] is word in sentence
+        """Method that transforms sequences of (token,label) into feature sequences. Returns two sequence lists for X and Y"""
         tokenized_sentences = []
         labels = []
         for index, sentence in enumerate(tokens_labels):
@@ -191,46 +102,36 @@ class NER_ClinicalBERT(object):
                              maxlen=NER_ClinicalBERT.MAX_LEN, value=NER_ClinicalBERT.tag2idx["PAD"], padding="post",
                              dtype="long", truncating="post")
 
-        # Result is pair X (array of sentences, where each sentence is an array of words) and Y (array of labels)
         return input_ids, tags
 
     def learn(self, X_train, Y_train, epochs=1):
         """Function that actually train the algorithm"""
-        # if torch.cuda.is_available():
-        #     self.model.cuda()
-
+        if torch.cuda.is_available():
+            self.model.cuda()
         tr_masks = [[float(i != 0.0) for i in ii] for ii in X_train]
 
-        print("READY TO CREATE SOME TENZORS!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        tr_inputs = torch.tensor(X_train).type(torch.long)
-        tr_tags = torch.tensor(Y_train).type(torch.long)
-        tr_masks = torch.tensor(tr_masks).type(torch.long)
+        tr_inputs = torch.tensor(X_train).type(torch.long).to(self.device)
+        tr_tags = torch.tensor(Y_train).type(torch.long).to(self.device)
+        tr_masks = torch.tensor(tr_masks).type(torch.long).to(self.device)
 
         train_data = TensorDataset(tr_inputs, tr_masks, tr_tags)
         train_sampler = RandomSampler(train_data)
-        train_dataloader = DataLoader(train_data, sampler=train_sampler, batch_size=NER_ClinicalBERT.bs)
+        train_dataloader = DataLoader(train_data, sampler=train_sampler, batch_size=self.bs)
 
-        print("READY TO PREPARE OPTIMIZER!!!!!!!!!!!!!!!!!!!!!!!!!!")
-
-        # Weight decay in Adam optimiser (adaptive gradient algorithm) is a regularisation technique which is extensively disucssed in this paper:
-        # https://arxiv.org/abs/1711.05101
-        # (Like L2 for SGD but different)
-        # resularisation of the model objective function in order to prevent overfitting of the model.
         FULL_FINETUNING = True
         if FULL_FINETUNING:
             param_optimizer = list(self.model.named_parameters())
             no_decay = ['bias', 'gamma', 'beta']
             optimizer_grouped_parameters = [
                 {'params': [p for n, p in param_optimizer if not any(nd in n for nd in no_decay)],
-                 'weight_decay_rate': 0.01},  # in AdamW implementation (default: 1e-2)
+                 'weight_decay_rate': 0.01},
                 {'params': [p for n, p in param_optimizer if any(nd in n for nd in no_decay)],
                  'weight_decay_rate': 0.0}
             ]
         else:
             param_optimizer = list(self.model.classifier.named_parameters())
-            optimizer_grouped_parameters = [{"params": [p for n, p in param_optimizer]}]
+            optimizer_grouped_parameters = [{"params": [p for n in param_optimizer]}]
 
-        # TODO: change to new implementation of AdamW: torch.optim.AdamW(...)
         optimizer = AdamW(
             optimizer_grouped_parameters,
             lr=3e-5,
@@ -239,99 +140,67 @@ class NER_ClinicalBERT(object):
 
         max_grad_norm = 1.0
 
-        # Total number of training steps is number of batches * number of epochs.
         total_steps = len(train_dataloader) * epochs
 
-        # Create the learning rate scheduler.
         scheduler = get_linear_schedule_with_warmup(
             optimizer,
             num_warmup_steps=0,
             num_training_steps=total_steps
         )
 
-        print("START TRAINING!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        ## Store the average loss after each epoch so we can plot them.
-        loss_values, validation_loss_values = [], []
-
-        # just for intermediate model save naming
-        epoch_num = 3
-
         for _ in trange(epochs, desc="Epoch"):
-            # ========================================
-            #               Training
-            # ========================================
-            # Perform one full pass over the training set.
-            # clean the cache not to fail with video memory
-            # if torch.cuda.is_available():
-            #     torch.cuda.empty_cache()
-
-            # just for intermediate model save naming
-            epoch_num += 1
-
-            # Put the model into training mode.
             self.model.train()
-            # Reset the total loss for this epoch.
             total_loss = 0
+            total_correct = 0
+            total_elements = 0
 
-            print("Start backprop and optimisation!!! Epoch has passed!!!!!!!!!!!!!!!!!!!!!!!")
-
-            # Training loop
             for step, batch in enumerate(train_dataloader):
-                #print("We are in the batch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-
-                # add batch to gpu
-                batch = tuple(b.to(NER_ClinicalBERT.device) for b in batch)
+                batch = tuple(b.to(self.device) for b in batch)
                 b_input_ids, b_input_mask, b_labels = batch
-                # Always clear any previously calculated gradients before performing a backward pass.
                 self.model.zero_grad()
-                # forward pass
-                # This will return the loss (rather than the model output)
-                # because we have provided the `labels`.
-                outputs = self.model(b_input_ids, token_type_ids=None,
-                                     attention_mask=b_input_mask, labels=b_labels)
-                # get the loss
+
+                outputs = self.model(b_input_ids, token_type_ids=None, attention_mask=b_input_mask, labels=b_labels)
                 loss = outputs[0]
+                logits = outputs[1]
 
-                # Perform a backward pass to calculate the gradients.
                 loss.backward()
-                # track train loss
                 total_loss += loss.item()
-                # Clip the norm of the gradient
-                # This is to help prevent the "exploding gradients" problem.
                 torch.nn.utils.clip_grad_norm_(parameters=self.model.parameters(), max_norm=max_grad_norm)
-                # update parameters
                 optimizer.step()
-                # Update the learning rate.
                 scheduler.step()
-                #print("We processed one batch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-            # Calculate the average loss over the training data.
+                # Calculate accuracy for this batch
+                predictions = torch.argmax(logits, dim=2)
+                correct_predictions = (predictions == b_labels).sum().item()
+                total_correct += correct_predictions
+                total_elements += b_labels.numel()
+
             avg_train_loss = total_loss / len(train_dataloader)
+            train_accuracy = total_correct / total_elements
             print("Average train loss: {}".format(avg_train_loss))
+            print("Training Accuracy: {}".format(train_accuracy))
+            self.loss_values.append(avg_train_loss)
+            self.train_accuracies.append(train_accuracy)
 
-            # Store the loss value for plotting the learning curve.
-            loss_values.append(avg_train_loss)
-
-            # Save intermediate weights of the model, i.e. if computer goes crazy and drops the training or you
-            # want to test the performance from different epochs
+            # Save model state after each epoch (optional)
             if not os.path.exists("Models/"):
                 os.makedirs("Models/")
-            torch.save(self.model.state_dict(),
-                       os.path.join("Models/", 'BERT_epoch-{}.pt'.format(epoch_num)))
+            torch.save(self.model.state_dict(), os.path.join("Models/", 'BERT_epoch-{}.pt'.format(_ + 1)))
 
-            # Plot the learning curve.
+        # Plot the learning curve after training
         plt.figure()
-        plt.plot(loss_values, 'b-o', label="training loss")
-        # Label the plot.
-        plt.title("Learning curve")
+        plt.plot(self.loss_values, 'b-o', label="Training Loss")
+        plt.plot(self.train_accuracies, 'g-o', label="Training Accuracy")  # Add training accuracy to the plot
+        plt.title("Learning Curve")
         plt.xlabel("Epoch")
-        plt.ylabel("Loss")
+        plt.ylabel("Loss/Accuracy")
         plt.legend()
-
+        plt.savefig("training_loss_accuracy_curve.png")
         plt.show()
 
     def evaluate(self, X_test, Y_test):
         """Function to evaluate algorithm"""
+        
         val_masks = [[float(i != 0.0) for i in ii] for ii in X_test]
         val_inputs = torch.tensor(X_test).type(torch.long)
         val_tags = torch.tensor(Y_test).type(torch.long)
@@ -341,69 +210,77 @@ class NER_ClinicalBERT(object):
         valid_sampler = SequentialSampler(valid_data)
         valid_dataloader = DataLoader(valid_data, sampler=valid_sampler, batch_size=NER_ClinicalBERT.bs)
 
-        # ========================================
-        #               Validation
-        # ========================================
-        # After the completion of each training epoch, measure our performance on
-        # our validation set.
-
-        # Put the model into evaluation mode to set dropout and batch normalization layers to evaluation mode to have consistent results
         self.model.eval()
-        # Reset the validation loss for this epoch.
         eval_loss, eval_accuracy = 0, 0
-        nb_eval_steps, nb_eval_examples = 0, 0
         predictions, true_labels = [], []
+
         for batch in valid_dataloader:
             batch = tuple(t.to(self.device) for t in batch)
             b_input_ids, b_input_mask, b_labels = batch
 
-            # Telling the model not to compute or store gradients,
-            # saving memory and speeding up validation
             with torch.no_grad():
-                # Forward pass, calculate logit predictions.
-                # This will return the logits rather than the loss because we have not provided labels.
-                outputs = self.model(b_input_ids, token_type_ids=None,
-                                     attention_mask=b_input_mask, labels=b_labels)
-            # Move logits and labels to CPU
+                outputs = self.model(b_input_ids, token_type_ids=None, attention_mask=b_input_mask, labels=b_labels)
+
             logits = outputs[1].detach().cpu().numpy()
             label_ids = b_labels.to('cpu').numpy()
 
-            # Calculate the accuracy for this batch of test sentences.
             eval_loss += outputs[0].mean().item()
             predictions.extend([list(p) for p in np.argmax(logits, axis=2)])
             true_labels.extend(label_ids)
 
         eval_loss = eval_loss / len(valid_dataloader)
         print("Validation loss: {}".format(eval_loss))
-        pred_tags = [NER_ClinicalBERT.tag_values[p_i] for p, l in zip(predictions, true_labels)
-                     for p_i, l_i in zip(p, l) if NER_ClinicalBERT.tag_values[l_i] != "PAD"]
-        valid_tags = [NER_ClinicalBERT.tag_values[l_i] for l in true_labels
-                      for l_i in l if NER_ClinicalBERT.tag_values[l_i] != "PAD"]
-        print("Validation Accuracy: {}".format(accuracy_score(pred_tags, valid_tags)))
-        print("Validation F1-Score: {}".format(f1_score(valid_tags, pred_tags, average='weighted')))
-        labels = ["ID", "PHI", "NAME", "CONTACT", "DATE", "AGE",
-                  "PROFESSION", "LOCATION"]
-        print(classification_report(valid_tags, pred_tags, digits=4, labels=labels))
-        print()
 
-        # # Use plot styling from seaborn.
-        # sns.set(style='darkgrid')
+        pred_tags = [
+            [NER_ClinicalBERT.tag_values[p_i] for p_i, l_i in zip(p, l) if NER_ClinicalBERT.tag_values[l_i] != "PAD"]
+            for p, l in zip(predictions, true_labels)
+        ]
+        valid_tags = [
+            [NER_ClinicalBERT.tag_values[l_i] for l_i in l if NER_ClinicalBERT.tag_values[l_i] != "PAD"]
+            for l in true_labels
+        ]
 
-        # # Increase the plot size and font size.
-        # sns.set(font_scale=1.5)
-        # plt.rcParams["figure.figsize"] = (12,6)
+        accuracy = accuracy_score(valid_tags, pred_tags)
+        f1 = f1_score(valid_tags, pred_tags, average='weighted')
+        precision = precision_score(valid_tags, pred_tags, average='weighted')
+        recall = recall_score(valid_tags, pred_tags, average='weighted')
 
-        # # Plot the learning curve.
-        # plt.plot(loss_values, 'b-o', label="training loss")
-        # plt.plot(validation_loss_values, 'r-o', label="validation loss")
+        print("Validation Accuracy: {}".format(accuracy))
+        print("Validation F1-Score: {}".format(f1))
+        print("Validation Precision: {}".format(precision))
+        print("Validation Recall: {}".format(recall))
 
-        # # Label the plot.
-        # plt.title("Learning curve")
-        # plt.xlabel("Epoch")
-        # plt.ylabel("Loss")
-        # plt.legend()
+        # Use seqeval's classification report
+        print(seqeval_classification_report(valid_tags, pred_tags, digits=4))
 
-        # plt.show()
+        # Plot the metrics
+        if hasattr(self, 'loss_values'):
+            epochs = list(range(1, len(self.loss_values) + 1))
+
+            plt.figure(figsize=(12, 6))
+
+            # Plot loss and training accuracy
+            plt.subplot(1, 2, 1)
+            plt.plot(epochs, self.loss_values, 'b-o', label="Training Loss")
+            plt.plot(epochs, self.train_accuracies, 'g-o', label="Training Accuracy")
+            plt.title("Training Loss and Accuracy")
+            plt.xlabel("Epoch")
+            plt.ylabel("Loss/Accuracy")
+            plt.legend()
+            
+            # Plot validation accuracy and F1-score
+            plt.subplot(1, 2, 2)
+            plt.plot(epochs, [accuracy] * len(epochs), 'g-o', label="Validation Accuracy")
+            plt.plot(epochs, [f1] * len(epochs), 'r-o', label="Validation F1-Score")
+            plt.title("Validation Metrics")
+            plt.xlabel("Epoch")
+            plt.ylabel("Score")
+            plt.legend()
+
+            plt.tight_layout()
+            plt.savefig("training_and_validation_metrics.png")
+
+            plt.show()
 
     def save(self, model_path):
         """
@@ -413,16 +290,3 @@ class NER_ClinicalBERT(object):
         """
         torch.save(self.model.state_dict(), "Models/" + model_path + ".pt")
         print("Saved model to disk")
-if __name__ == "__main__":
-    # Initialize the NER model
-    ner_model = NER_ClinicalBERT()
-
-    # Example text
-    text = "Patient John Doe visited the hospital on 2023-01-01. His contact number is 123-456-7890."
-
-    # Perform NER
-    entities = ner_model.perform_NER(text)
-    
-    # Print the results
-    for entity in entities:
-        print(entity)
