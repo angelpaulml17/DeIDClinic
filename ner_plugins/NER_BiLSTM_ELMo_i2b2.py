@@ -20,11 +20,13 @@ import numpy as np
 import tensorflow as tf
 import tensorflow_hub as hub
 from keras import backend as K
-from keras.models import Model, Input
-from keras.layers.merge import add
-from keras.layers import LSTM, Dense, TimeDistributed, Bidirectional, Lambda
-from utils.spec_tokenizers import tokenize_fa
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input
 
+from tensorflow.keras.layers import add
+from tensorflow.keras.layers import LSTM, Dense, TimeDistributed, Bidirectional, Lambda
+from utils.spec_tokenizers import tokenize_fa
+import tensorflow.compat.v1 as tf
 
 class NER_BiLSTM_ELMo_i2b2(object):
     """Class that implements and performs named entity recognition using BiLSTM
@@ -34,6 +36,8 @@ class NER_BiLSTM_ELMo_i2b2(object):
     def __init__(self):
         """Implementation of initialization"""
         # load json and create model
+        tf.disable_v2_behavior()
+
         self.sess = tf.Session()
         K.set_session(self.sess)
         self.elmo_model = hub.Module("https://tfhub.dev/google/elmo/2", trainable=True)
