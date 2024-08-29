@@ -171,3 +171,13 @@ Alternatively, the model can be trained on Google Colab with GPU for faster trai
 4. **Copy the provided URL** (e.g., http://127.0.0.1:5000) and paste it into your web browser.
 
 5. **The website will load** and can be used to de-identify documents.
+
+
+
+
+
+NOTE: The only folders/files changed/added to the older MASK version are 
+1. "dataset and website"- where the dataset can be placed and website is built
+2. "ner_plugins"- "NER_ClinicalBERT.py" file is added
+3. "Models"- Once the model is trained, the NER_ClinicalBERT is saved in the Models file
+4. In the root folder 3 files were added, "extractcounts.py"(to analyse the entity distribution in the dataset), "name extraction.py"(extract all the names, locations and professions from the dataset to create base dictionaries), requirements.txt (to save all the required packages with their respective versions compatible with Python 3.7.9)
