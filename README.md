@@ -7,7 +7,7 @@ DeIDClinic is a tool designed for de-identifying clinical documents using state-
 1. [Download the Project from GitHub](#1-download-the-project-from-github)
 2. [Setup Python Environment](#2-setup-python-environment)
 3. [Dataset Preparation](#3-dataset-preparation)
-4. [Model Training and Analysis](#4-model-training-and-analysis)
+4. [Model Training](#4-model-training)
 5. [Running the Website](#5-running-the-website)
 
 ## 1. Download the Project from GitHub
@@ -56,9 +56,7 @@ DeIDClinic is a tool designed for de-identifying clinical documents using state-
 
     The `requirements.txt` file contains all the required packages with versions to run the application seamlessly.
 
-7. **Verify that all required packages are installed successfully**. You should see a screen similar to Figure 1.
 
-![Figure 1: Successful package installation completion screen](path_to_image)
 
 ## 3. Dataset Preparation
 
@@ -66,7 +64,7 @@ The dataset used in this project is provided by the i2b2/UTHealth initiative and
 
 ### 3.1 Accessing the Dataset
 
-1. **Open the N2C2 NLP portal**:
+1. **Open the [N2C2 NLP portal](https://portal.dbmi.hms.harvard.edu/projects/n2c2-nlp/)**:
 
     - Create an account and apply for access to the datasets.
     - Once access is granted, download the following datasets from the “2014 De-identification and Heart Disease Risk Factors Challenge” folder:
@@ -79,27 +77,8 @@ The dataset used in this project is provided by the i2b2/UTHealth initiative and
 
 3. **Copy the consolidated dataset** to the downloaded GitHub folder.
 
-### 3.2 Data Pre-processing
 
-The files in the dataset are in XML format. A pre-processing function extracts only the text within the `<TEXT>` elements of the XML files, converting them into plain text format.
-
-### 3.3 Exploratory Data Analysis (EDA)
-
-1. **Perform EDA on the dataset**:
-
-    - Open the `extractcounts.py` file.
-    - Replace the path of the `xml_directory` variable with the path where the dataset is placed.
-    - Save the file and run the following command on the terminal:
-
-        ```bash
-        python extractcounts.py
-        ```
-
-    This script processes XML files to extract and count entities, then aggregates the counts and generates a bar chart comparing the total and unique counts of each entity type. The output should look like Figure 2.
-
-![Figure 2: Entity occurrence distribution](path_to_image)
-
-## 4. Model Training and Analysis
+## 4. Model Training
 
 ### 4.1 Training on a Local Machine
 
@@ -141,19 +120,29 @@ Alternatively, the model can be trained on Google Colab with GPU for faster trai
 5. **Run the following commands** to create the Python 3.7 virtual environment and install the required packages:
 
     ```bash
-    !apt-get update -y
+    !apt-get update –y
     !apt-get install python3.7 python3.7-venv python3.7-dev -y
-    !apt-get install python3-pip -y
+    !apt-get install python3-pip –y
     !python3.7 -m ensurepip --upgrade
     !python3.7 -m pip install --upgrade pip
     !python3.7 -m pip install pipenv
-    !pipenv install
-    !pipenv run pip install -r requirements.txt
+    !python3.7 -m pip install httplib2
+    !python3.7 -m pipenv install
+    !python3.7 -m pipenv run pip install keras==2.6.0
+    !pipenv run pip install pandas
+    !pipenv run pip install spacy
+    !pipenv run pip install medcat
+    !pip install scikit-learn
+    !pip install nltk
+    !pip install tensorflow_hub
+    !pip install tensorflow
+    !pip install transformers
+    !pip install sklearn_crfsuite
+    !pipenv install flask
+    !pipenv shell
     ```
 
-    Once the environment is set up, you should see a response similar to Figure 3.
-
-![Figure 3: Google Colab Successful Shell Run screen](path_to_image)
+    
 
 6. **Train the model** using the below command:
 
@@ -161,9 +150,7 @@ Alternatively, the model can be trained on Google Colab with GPU for faster trai
     !pipenv run python3.7 train_framework.py --source_type i2b2 --source_location “[PATH TO THE DATASET]" --algorithm NER_ClinicalBERT --do_test yes --save_model yes --epochs 15
     ```
 
-7. **Once the training is complete**, the model will be saved in the `Models` folder with a `.pt` extension. A classification report similar to Figure 4 will be visible.
-
-![Figure 4: Classification report of ClinicalBERT](path_to_image)
+7. **Once the training is complete**, the model will be saved in the `Models` folder with a `.pt` extension. 
 
 8. **Download the trained model** and place it under the `Models` folder on the local machine.
 
@@ -180,10 +167,6 @@ Alternatively, the model can be trained on Google Colab with GPU for faster trai
     ```bash
     python app.py
     ```
-
-3. **Monitor the terminal output**. Once you see a screen similar to Figure 8, it indicates that the app ran successfully and is hosted locally.
-
-![Figure 8: Website Run Screen](path_to_image)
 
 4. **Copy the provided URL** (e.g., http://127.0.0.1:5000) and paste it into your web browser.
 
