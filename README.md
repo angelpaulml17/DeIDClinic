@@ -27,7 +27,7 @@ DeIDClinic is a tool designed for de-identifying clinical documents using state-
    - Note the installation path.
 
 2. **Open the project folder** in your preferred code editor (e.g., Visual Studio Code).
-
+    **NOTE**: The following commands are applicable only on Windows systems.
 3. **Navigate to the project directory**:
 
     ```bash
