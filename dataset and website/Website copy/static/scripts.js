@@ -1077,7 +1077,7 @@ function calculateSeverity(count, totalCount) {
     if (percentage < 25) {
         return 'green';
     } else if (percentage >= 25 && percentage <= 50) {
-        return 'yellow';
+        return '#FFC300';
     } else {
         return 'red';
     }
