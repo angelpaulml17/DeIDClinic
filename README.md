@@ -177,7 +177,7 @@ Alternatively, the model can be trained on Google Colab with GPU for faster trai
 
 
 NOTE: The only folders/files changed/added to the older MASK version are 
-1. "dataset and website"- where the dataset can be placed and website is built
+1. "dataset and website"- where the dataset can be placed and website is built and run on flask servers.
 2. "ner_plugins"- "NER_ClinicalBERT.py" file is added
 3. "Models"- Once the model is trained, the NER_ClinicalBERT is saved in the Models file
-4. In the root folder 3 files were added, "extractcounts.py"(to analyse the entity distribution in the dataset), "name extraction.py"(extract all the names, locations and professions from the dataset to create base dictionaries), requirements.txt (to save all the required packages with their respective versions compatible with Python 3.7.9)
+4. In the root folder 4 files were added, "extractcounts.py"(to analyse the entity distribution in the dataset), "name extraction.py"(extract all the names, locations and professions from the dataset to create base dictionaries), requirements.txt (to save all the required packages with their respective versions compatible with Python 3.7.9) and model_performance.py (to create heatmap on the entity level performace of multiple models)
