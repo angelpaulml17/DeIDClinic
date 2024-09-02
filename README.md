@@ -27,14 +27,16 @@ DeIDClinic is a tool designed for de-identifying clinical documents using state-
    - Note the installation path.
 
 2. **Open the project folder** in your preferred code editor (e.g., Visual Studio Code).
-    **NOTE**: The following commands are applicable only on Windows systems.
-3. **Navigate to the project directory**:
+
+   **NOTE**: The following commands are applicable only on Windows systems.
+   
+4. **Navigate to the project directory**:
 
     ```bash
     cd .\DeIDClinic-main\
     ```
 
-4. **Create a virtual environment** for Python 3.7.9 using the following command:
+5. **Create a virtual environment** for Python 3.7.9 using the following command:
 
     ```bash
     & "PATH TO PYTHON 3.7 .exe FILE" -m venv myenvpytest
@@ -42,13 +44,13 @@ DeIDClinic is a tool designed for de-identifying clinical documents using state-
 
     Replace `PATH TO PYTHON 3.7 .exe FILE` with the actual path to `python.exe` where Python 3.7 was installed.
 
-5. **Activate the virtual environment** so that the code runs within it:
+6. **Activate the virtual environment** so that the code runs within it:
 
     ```bash
     .\myenvpytest\Scripts\Activate
     ```
 
-6. **Install all required packages**:
+7. **Install all required packages**:
 
     ```bash
     pip install -r requirements.txt
