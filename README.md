@@ -185,12 +185,7 @@ NOTE: The only folders/files changed/added to the older MASK version are
 4. In the root folder 4 files were added, "extractcounts.py"(to analyse the entity distribution in the dataset), "name extraction.py"(extract all the names, locations and professions from the dataset to create base dictionaries), requirements.txt (to save all the required packages with their respective versions compatible with Python 3.7.9) and model_performance.py (to create heatmap on the entity level performance of multiple models)
 
 
-@misc{paul2024deidclinicmultilayeredframeworkdeidentification,
-      title={DeIDClinic: A Multi-Layered Framework for De-identification of Clinical Free-text Data}, 
-      author={Angel Paul and Dhivin Shaji and Lifeng Han and Warren Del-Pinto and Goran Nenadic},
-      year={2024},
-      eprint={2410.01648},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2410.01648}, 
-}
+## References
+
+- Paul, A., Shaji, D., Han, L., Del-Pinto, W., & Nenadic, G. (2024). *DeIDClinic: A Multi-Layered Framework for De-identification of Clinical Free-text Data*. arXiv. https://arxiv.org/abs/2410.01648
+
