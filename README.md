@@ -187,5 +187,15 @@ NOTE: The only folders/files changed/added to the older MASK version are
 
 ## References
 
-- Paul, A., Shaji, D., Han, L., Del-Pinto, W., & Nenadic, G. (2024). *DeIDClinic: A Multi-Layered Framework for De-identification of Clinical Free-text Data*. arXiv. https://arxiv.org/abs/2410.01648
+```bibtex
+@misc{paul2024deidclinicmultilayeredframeworkdeidentification,
+      title={DeIDClinic: A Multi-Layered Framework for De-identification of Clinical Free-text Data}, 
+      author={Angel Paul and Dhivin Shaji and Lifeng Han and Warren Del-Pinto and Goran Nenadic},
+      year={2024},
+      eprint={2410.01648},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2410.01648}, 
+}
+
 
