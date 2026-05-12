@@ -191,5 +191,5 @@ NOTE: The only folders/files changed/added to the older MASK version are
 
 - Shaji, D., Paul, A., Han, L., Del-Pinto, W., Nenadic, G., & Verberne, S. (2025, June). De-identifying Clinical Texts using Biomed-Clinical BERTs and Comprehensive Risk Assessment. In 2025 IEEE 13th International Conference on Healthcare Informatics (ICHI) (pp. 683-684). IEEE.
  
-
+[ppt download](https://github.com/4dpicture/DeIDClinic/blob/main/LEGAL2026-CALD-PSEUDO-PPT-De-idclinic.pdf)
 
